@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "History.findByStatus", query = "SELECT h FROM History h WHERE h.status = :status")})
 public class History implements Serializable {
 
-    public History(String name, BigDecimal amount, BigDecimal fee, Date transactionDate, Integer status, Account accId) {
+    public History(String name, double amount, double fee, Date transactionDate, Integer status, Account accId) {
         this.name = name;
         this.amount = amount;
         this.fee = fee;
@@ -63,9 +63,9 @@ public class History implements Serializable {
     private String name;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "AMOUNT")
-    private BigDecimal amount;
+    private double amount;
     @Column(name = "FEE")
-    private BigDecimal fee;
+    private double fee;
     @Column(name = "TRANSACTION_DATE")
     @Temporal(TemporalType.DATE)
     private Date transactionDate;
@@ -98,19 +98,19 @@ public class History implements Serializable {
         this.name = name;
     }
 
-    public BigDecimal getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public BigDecimal getFee() {
+    public double getFee() {
         return fee;
     }
 
-    public void setFee(BigDecimal fee) {
+    public void setFee(double fee) {
         this.fee = fee;
     }
 

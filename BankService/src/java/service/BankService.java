@@ -116,17 +116,17 @@ public class BankService {
         Account customer = getAccount(accountNumber, pin);
         if (partner != null & customer != null) {
             double amountL = Double.parseDouble(amount);
-            double balanceCus = customer.getBalance().doubleValue();
-            double balancePartner = partner.getBalance().doubleValue();
+            double balanceCus = customer.getBalance();
+            double balancePartner = partner.getBalance();
             double fee = calFee(amountL);
             double total = amountL + fee;
             if (balanceCus>=total) {
                 balanceCus = balanceCus - total;
                 balancePartner = balancePartner+amountL;
-                customer.setBalance(new BigDecimal(balanceCus));
-                partner.setBalance(new BigDecimal(balancePartner));
-                History historyCus = new History("mua hang",new BigDecimal(-amountL),new BigDecimal(fee),new Date(),1,customer);
-                History historyPartner = new History("ban hang",new BigDecimal(amount),new BigDecimal(fee),new Date(),1,partner);
+                customer.setBalance(balanceCus);
+                partner.setBalance(balancePartner);
+                History historyCus = new History("mua hang",-amountL,fee,new Date(),1,customer);
+                History historyPartner = new History("ban hang",amountL,fee,new Date(),1,partner);
                 em.persist(historyCus);
                 em.persist(historyPartner);
                 return "success";

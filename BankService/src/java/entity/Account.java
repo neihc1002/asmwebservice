@@ -59,7 +59,7 @@ public class Account implements Serializable {
     private String pin;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "BALANCE")
-    private BigDecimal balance;
+    private double balance;
     @Column(name = "STATUS")
     private Integer status;
     @OneToMany(mappedBy = "accId", fetch = FetchType.LAZY)
@@ -106,11 +106,11 @@ public class Account implements Serializable {
         this.pin = pin;
     }
 
-    public BigDecimal getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(BigDecimal balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 

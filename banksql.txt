@@ -1,0 +1,36 @@
+create table customer(
+id int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
+name varchar(255),
+age int,
+address varchar(255),
+person_id varchar(50),
+create_date date,
+modified_date date,
+status int
+)
+
+create table account(
+    id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
+    acc_number varchar(50) NOT NULL UNIQUE ,
+    pin char(6),
+    balance double,
+    status int,
+    cus_id int references customer(id)
+)
+
+create table partner(
+    id int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
+    partner_code varchar(50),
+    partner_password varchar(50),
+    status int,
+    acc_id int references account(id)
+)
+create table history(
+    id int GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1) PRIMARY KEY,
+    name varchar(255),
+    amount double,
+    fee double,
+    transaction_date date,
+    acc_id int references account(id),
+    status int
+)
